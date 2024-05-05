@@ -32,7 +32,8 @@ Every data source in this project was created for test purposes. If any request 
 ### Code Quality & Readability
 - To improve the code quality and readability,
   1. Have to split the long functions in parts and split the file in multiple files which are working independently w.r.t each other
-  2. As Hubspot documentation have similar api names with dynamic changes, we could split it into different **design patterns** 
+  2. Write automated test cases w.r.t each class or functions covering 80% or more of the code to make sure that new features are not breaking old functionalities
+  3. As Hubspot documentation have similar api names with dynamic changes, we could split it into different **design patterns** 
     - **Factory Method:** To focus on Batch, Basic, Search and so on as a whole
     - **Abstact Factory:** Inherit from above class and build functionality w.r.t different parts like contacts, companies and so on. 
     - **Builder & Prototype**: Inherit from above class and improvise functionality across multiple parts like CRUD in batch, basic, search
@@ -42,4 +43,13 @@ Every data source in this project was created for test purposes. If any request 
 - As project follows **observer** using webhooks and **command** using CRON jobs behavioral design pattern, 
 - it could be designed as a **serverless** or **background jobs in batch** architecture with multiple parts working independently
 - parts can communicate with each other via events, SQS, SNS or kafka depending on their criticality and real-time analysis
-- 
+
+### Code Performance
+- To improve code performance, various things should be kept in mind
+  1. Number of Methods or features, which are not independent
+    - Spun them in parallel as background jobs or serverless
+  2. Number of methods or features, which are dependent
+    - Follow the *chain of responsibility* or *iterator* pattern with events such that each component works independently and acknowledge each other via events
+  3. DB communication
+    - More dependency or connections, use cache to store duplicate data
+  4. use of different protocols like GraphQL over REST, HTTP 2.0 over HTTP 1.3 in case of communication between servers only
