@@ -1,0 +1,274 @@
+[
+  {
+    "name": "hs_activity_type",
+    "description": "The activity type of the engagement"
+  },
+  {
+    "name": "hs_all_assigned_business_unit_ids",
+    "description": "The business units this record is assigned to."
+  },
+  {
+    "name": "hs_at_mentioned_owner_ids",
+    "description": "The owners that have been at-mentioned on the engagement"
+  },
+  {
+    "name": "hs_attachment_ids",
+    "description": "The IDs of the files that are attached to the engagement"
+  },
+  {
+    "name": "hs_attendee_owner_ids",
+    "description": "List of HubSpot owner IDs for additional attendees"
+  },
+  {
+    "name": "hs_body_preview",
+    "description": "A truncated preview of the engagegement body"
+  },
+  {
+    "name": "hs_body_preview_html",
+    "description": "The HTML representation of the engagement body preview"
+  },
+  {
+    "name": "hs_body_preview_is_truncated",
+    "description": "Indicates if the engagement body was truncated for the preview"
+  },
+  {
+    "name": "hs_contact_first_outreach_date",
+    "description": "The first outreach date of the associated contact"
+  },
+  {
+    "name": "hs_created_by",
+    "description": "The user who created the engagement"
+  },
+  {
+    "name": "hs_created_by_user_id",
+    "description": "The user that created this object. This value is automatically set by HubSpot and may not be modified."
+  },
+  {
+    "name": "hs_createdate",
+    "description": "The date that an engagement was created"
+  },
+  {
+    "name": "hs_engagement_source",
+    "description": "The source that created this engagement"
+  },
+  {
+    "name": "hs_engagement_source_id",
+    "description": "The specific ID of the process that created this engagement"
+  },
+  {
+    "name": "hs_follow_up_action",
+    "description": "What action should be performed during follow up"
+  },
+  {
+    "name": "hs_gdpr_deleted",
+    "description": "Indicates the body of this engagement has been cleared because of a GDPR delete request"
+  },
+  {
+    "name": "hs_guest_emails",
+    "description": "Guest emails on a meeting booking"
+  },
+  { "name": "hs_i_cal_uid", "description": "The iCalUid of the synced event" },
+  {
+    "name": "hs_include_description_in_reminder",
+    "description": "Indicates whether or not the prosepct reminders should include the meeting description"
+  },
+  {
+    "name": "hs_internal_meeting_notes",
+    "description": "The internal notes from the meeting"
+  },
+  {
+    "name": "hs_lastmodifieddate",
+    "description": "The date any property on this engagement was modified"
+  },
+  {
+    "name": "hs_meeting_body",
+    "description": "The text description of the meeting"
+  },
+  {
+    "name": "hs_meeting_calendar_event_hash",
+    "description": "The unique hash for the meeting"
+  },
+  {
+    "name": "hs_meeting_change_id",
+    "description": "The unique change id for the meeting"
+  },
+  {
+    "name": "hs_meeting_created_from_link_id",
+    "description": "Created From Link ID"
+  },
+  {
+    "name": "hs_meeting_end_time",
+    "description": "The date when the meeting ends"
+  },
+  {
+    "name": "hs_meeting_external_url",
+    "description": "The external URL for the meeting"
+  },
+  {
+    "name": "hs_meeting_location",
+    "description": "Where the meeting takes place"
+  },
+  {
+    "name": "hs_meeting_location_type",
+    "description": "The type of location for the meeting event"
+  },
+  { "name": "hs_meeting_ms_teams_payload", "description": "" },
+  {
+    "name": "hs_meeting_outcome",
+    "description": "The outcome of this meeting"
+  },
+  {
+    "name": "hs_meeting_payments_session_id",
+    "description": "The payments session id for the meeting"
+  },
+  {
+    "name": "hs_meeting_pre_meeting_prospect_reminders",
+    "description": "A list of dates when meeting reminders should be sent to prospects"
+  },
+  {
+    "name": "hs_meeting_source",
+    "description": "The source where the meeting was booked"
+  },
+  {
+    "name": "hs_meeting_source_id",
+    "description": "The source ID of the meeting"
+  },
+  {
+    "name": "hs_meeting_start_time",
+    "description": "The date when the meeting starts"
+  },
+  { "name": "hs_meeting_title", "description": "The title of the meeting" },
+  {
+    "name": "hs_meeting_web_conference_meeting_id",
+    "description": "The meeting ID of the web conference"
+  },
+  {
+    "name": "hs_merged_object_ids",
+    "description": "The list of record IDs that have been merged into this record. This value is automatically set by HubSpot and may not be modified."
+  },
+  {
+    "name": "hs_modified_by",
+    "description": "The user who last updated the engagement"
+  },
+  {
+    "name": "hs_object_id",
+    "description": "The unique ID for this record. This value is automatically set by HubSpot and may not be modified."
+  },
+  {
+    "name": "hs_object_source",
+    "description": "Source (PropertySource) that created this object record"
+  },
+  {
+    "name": "hs_object_source_detail_1",
+    "description": "First level of detail on how this record was created"
+  },
+  {
+    "name": "hs_object_source_detail_2",
+    "description": "Second level of detail on how this record was created"
+  },
+  {
+    "name": "hs_object_source_detail_3",
+    "description": "Third level of detail on how this record was created"
+  },
+  {
+    "name": "hs_object_source_id",
+    "description": "The sourceId -- further detail -- of the source that created this object record"
+  },
+  {
+    "name": "hs_object_source_label",
+    "description": "How this record was created"
+  },
+  {
+    "name": "hs_object_source_user_id",
+    "description": "User ID of the user who initiated creation of this object record"
+  },
+  {
+    "name": "hs_outcome_canceled_count",
+    "description": "1 if outcome is canceled otherwise 0"
+  },
+  {
+    "name": "hs_outcome_completed_count",
+    "description": "1 if outcome is completed otherwise 0"
+  },
+  {
+    "name": "hs_outcome_no_show_count",
+    "description": "1 if outcome is no-show otherwise 0"
+  },
+  {
+    "name": "hs_outcome_rescheduled_count",
+    "description": "1 if outcome is rescheduled otherwise 0"
+  },
+  {
+    "name": "hs_outcome_scheduled_count",
+    "description": "1 if outcome is scheduled otherwise 0"
+  },
+  {
+    "name": "hs_product_name",
+    "description": "The name of the product associated with this engagement"
+  },
+  {
+    "name": "hs_queue_membership_ids",
+    "description": "The list of queues that contain this engagement"
+  },
+  { "name": "hs_read_only", "description": "Is the object read only" },
+  {
+    "name": "hs_roster_object_coordinates",
+    "description": "The ID of the associated roster object if the meeting was booked via a roster"
+  },
+  { "name": "hs_scheduled_tasks", "description": "" },
+  {
+    "name": "hs_time_to_book_meeting_from_first_contact",
+    "description": "The time it took to book a meeting from first outreach date of the associated contact"
+  },
+  {
+    "name": "hs_timestamp",
+    "description": "The date that an engagement occurred"
+  },
+  { "name": "hs_timezone", "description": "Timezone of the meeting booking" },
+  {
+    "name": "hs_unique_creation_key",
+    "description": "Unique property used for idempotent creates"
+  },
+  { "name": "hs_unique_id", "description": "The unique ID of the engagement" },
+  {
+    "name": "hs_updated_by_user_id",
+    "description": "The user that last updated this object. This value is automatically set by HubSpot and may not be modified."
+  },
+  {
+    "name": "hs_user_ids_of_all_notification_followers",
+    "description": "The user IDs of all users that have clicked follow within the object to opt-in to getting follow notifications"
+  },
+  {
+    "name": "hs_user_ids_of_all_notification_unfollowers",
+    "description": "The user IDs of all object owners that have clicked unfollow within the object to opt-out of getting follow notifications"
+  },
+  {
+    "name": "hs_user_ids_of_all_owners",
+    "description": "The user IDs of all owners of this object"
+  },
+  { "name": "hs_was_imported", "description": "Object is part of an import" },
+  {
+    "name": "hubspot_owner_assigneddate",
+    "description": "The timestamp when an owner was assigned to this engagement"
+  },
+  {
+    "name": "hubspot_owner_id",
+    "description": "The user that the activity is assigned to in HubSpot. This can be any HubSpot user or Salesforce integration user, and can be set manually or via Workflows."
+  },
+  {
+    "name": "hubspot_team_id",
+    "description": "The team of the owner of an engagement."
+  },
+  {
+    "name": "hs_all_owner_ids",
+    "description": "The value of all owner referencing properties for this object, both default and custom"
+  },
+  {
+    "name": "hs_all_team_ids",
+    "description": "The team ids corresponding to all owner referencing properties for this object, both default and custom"
+  },
+  {
+    "name": "hs_all_accessible_team_ids",
+    "description": "The team ids, including up the team hierarchy, corresponding to all owner referencing properties for this object, both default and custom"
+  }
+]
