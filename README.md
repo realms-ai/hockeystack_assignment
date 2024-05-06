@@ -6,7 +6,7 @@ This project requires a newer version of Node. Don't forget to install the NPM p
 
 You should change the name of the ```.env.example``` file to ```.env```.
 
-Run ```node app.js``` to get things started. Hopefully the project should start without any errors.
+Run ```node app.js``` OR ```npm run dev``` to get things started. Hopefully the project should start without any errors.
 
 ## Explanations
 
