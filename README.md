@@ -26,7 +26,10 @@ Every data source in this project was created for test purposes. If any request 
 
 1. All the **meetings** at the moment have updated date before the lastPulledDate, so create a new meeting or update any of the meetings with marked as **completed** to see the result
 2. If you want to see more logs, un-comment the lines with **console.info** in the code
+3. If you want to see the **curl** commands in terminal logs like below, then follow the code in [branch](https://github.com/realms-ai/hockeystack_assignment/tree/devCurl)
 
+![curl commands](./data/curl_commands_in_terminal.png)
+   
 ## Brief by Navpreet Singh (Developer)
 
 ### Code Quality & Readability
