@@ -4,11 +4,12 @@ const _ = require('lodash');
 const util = require('util')
 const fs = require('fs')
 const path = require('path');
+const debugLog = util.debuglog('curl');
 
 const { filterNullValuesFromObject, goal } = require('./utils');
 const Domain = require('./Domain');
 
-const hubspotClient = new hubspot.Client({ accessToken: null});
+const hubspotClient = new hubspot.Client({ acfscessToken: null});
 const propertyPrefix = 'hubspot__';
 let expirationDate;
 // let expirationDate = new Date(Date.now() + (86500*1000));
@@ -43,15 +44,15 @@ const refreshAccessToken = async (domain, hubId, tryCount) => {
   const account = domain.integrations.hubspot.accounts.find(account => account.hubId === hubId);
   const { accessToken, refreshToken } = account;
   const rt = process.env.HUBSPOT_REFRESH_TOKEN
-
+  debugLog("\n\n\n\n\nTesting Debug Logging\n\n\n\n\n")
   return hubspotClient.oauth.tokensApi
-    .createToken('refresh_token', undefined, undefined, HUBSPOT_CID, HUBSPOT_CS, rt || refreshToken)
+    .create('refresh_token', undefined, undefined, HUBSPOT_CID, HUBSPOT_CS, rt || refreshToken)
     .then(async result => {
       const body = result.body ? result.body : result;
 
       const newAccessToken = body.accessToken;
       expirationDate = new Date(body.expiresIn * 1000 + new Date().getTime());
-      // console.info("Access Token: ", newAccessToken)
+      console.info("Access Token: ", newAccessToken)
 
       hubspotClient.setAccessToken(newAccessToken);
       if (newAccessToken !== accessToken) {
@@ -68,9 +69,9 @@ const getObjectProperties = async (objectType = 'contacts', fileName='contactPro
   const file = path.join(__dirname, 'data', fileName)
   let data = await fs.readFileSync(file, { encoding: 'utf8', flag: 'r' })
   data = JSON.parse(data)
-  // console.info(`${objectType} properties: `)
+  console.info(`${objectType} properties: `)
   if(data.length > 0){
-    // console.info("Local Data: ", data);
+    console.info("Local Data: ", data);
     return data
   } else {
     const archived = false;
@@ -86,7 +87,7 @@ const getObjectProperties = async (objectType = 'contacts', fileName='contactPro
           description: e.description
         }
       })
-      // console.info("Refined Response: ", util.inspect(refinedResponse, false, 3, true));
+      console.info("Refined Response: ", util.inspect(refinedResponse, false, 3, true));
       // debugger
       fs.writeFile(file, JSON.stringify(refinedResponse), (err) => {
         // In case of a error throw err.
@@ -207,7 +208,7 @@ const processContacts = async (domain, hubId, q) => {
   while (hasMore) {
     const lastModifiedDate = offsetObject.lastModifiedDate || lastPulledDate;
     const lastModifiedDateFilter = generateLastModifiedDateFilter(lastModifiedDate, now, 'lastmodifieddate');
-    // console.info("Last Modified Date Filter: ", lastModifiedDateFilter)
+    console.info("Last Modified Date Filter: ", lastModifiedDateFilter)
     const searchObject = {
       // filterGroups: [lastModifiedDateFilter],
       sorts: [{ propertyName: 'lastmodifieddate', direction: 'ASCENDING' }],
@@ -241,7 +242,7 @@ const processContacts = async (domain, hubId, q) => {
       }
     }
 
-    // console.info("Search Result Contacts: ", util.inspect(searchResult, false, 3, true) )
+    console.info("Search Result Contacts: ", util.inspect(searchResult, false, 3, true) )
 
     if (!searchResult) throw new Error('Failed to fetch contacts for the 4th time. Aborting.');
 
@@ -260,7 +261,7 @@ const processContacts = async (domain, hubId, q) => {
       body: { inputs: contactsToAssociate.map(contactId => ({ id: contactId })) }
     })).json())?.results || [];
 
-    // console.info("Company Associates: ", companyAssociationsResults)
+    console.info("Company Associates: ", companyAssociationsResults)
 
     const companyAssociations = Object.fromEntries(companyAssociationsResults.map(a => {
       if (a.from) {
@@ -331,7 +332,7 @@ const getMeetings = async(lastPulledDate, now, offsetObject) => {
       // }
     ]
   }
-  // console.info("Final Filter: ", finalFilter)
+  console.info("Final Filter: ", finalFilter)
   // let meetingProperties = await getObjectProperties('meetings', 'meetingProperties.json')
   // debugger
   const searchObject = {
@@ -383,7 +384,7 @@ const getMeetings = async(lastPulledDate, now, offsetObject) => {
     }
   }
 
-  // console.info("Search Result Meetings: ", util.inspect(searchResult, false, 3, true) )
+  console.info("Search Result Meetings: ", util.inspect(searchResult, false, 3, true))
 
   if (!searchResult) throw new Error('Failed to fetch meetings for the 4th time. Aborting.');
 
@@ -414,7 +415,7 @@ const getAssociation = async (data) => {
     body: { inputs: meetingIds.map(meetingId => ({ id: meetingId })) }
   })).json())?.results || [];
 
-  // console.info("Contact Associates: ", contactAssociationsResults)
+  console.info("Contact Associates: ", contactAssociationsResults)
 
   let contactIds = []
   const contactAssociations = Object.fromEntries(contactAssociationsResults.map(a => {
@@ -427,7 +428,7 @@ const getAssociation = async (data) => {
     } else return false;
   }).filter(x => x));
 
-  // console.info("Contact Meeting Association: ", contactAssociations)
+  console.info("Contact Meeting Association: ", contactAssociations)
 
   // Get unique contacts Ids
   contactIds = contactIds.filter((v,i,self) => i == self.indexOf(v))
@@ -452,16 +453,18 @@ const getContactsData = async (contactIds) => {
       'email',
     ]
   }
-  let contacts = (await (await hubspotClient.apiRequest({
+  const request = hubspotClient.apiRequest({
     method: 'post',
     path: '/crm/v3/objects/contacts/batch/read?archived=false',
     body: contactObject
-  })).json())?.results || [];
+  })
+
+  let contacts = (await request).json()?.results || [];
   
   return Object.fromEntries(contacts.map(contact => {
     return [contact.id, contact.properties]
   }).filter(x => x))
-  // console.info("Contacts Data: ", util.inspect(contacts, false, 5, true))
+  console.info("Contacts Data: ", util.inspect(contacts, false, 5, true))
 }
 
 
@@ -471,7 +474,7 @@ const processMeetings = async (domain, hubId, q) => {
   // Use below startDate to fetch older data which is before the lastPulledDates
   // const lastPulledDate = new Date(Date.parse(account.lastPulledDates.meetings) - (86400*365*2*1000));
   const lastPulledDate = new Date(Date.parse(account.lastPulledDates.meetings));
-  // console.info("Last pulled Meeting Date: ", lastPulledDate)
+  console.info("Last pulled Meeting Date: ", lastPulledDate)
   const now = new Date();
   let hasMore = true;
   const offsetObject = {};
@@ -494,7 +497,7 @@ const processMeetings = async (domain, hubId, q) => {
         }
       };
 
-      // console.info("Meeting Action Template: ", actionTemplate)
+      console.info("Meeting Action Template: ", actionTemplate)
 
       // TASK 2: Insert Actions **Meeting Created** and **Meeting Completed**
       const isCreated = new Date(meeting.createdAt) > lastPulledDate
@@ -604,11 +607,11 @@ const pullDataFromHubspot = async () => {
       loginConnection: { loginType: 'password' }
     }
   */
-  // console.info("Domain: ", util.inspect(domain, false, 5, true ))
+  console.info("Domain: ", util.inspect(domain, false, 5, true ))
 
   for (const account of domain.integrations.hubspot.accounts) {
     console.log('start processing account');
-    // console.info("Account: ", account)
+    console.info("Account: ", account)
     try {
       await refreshAccessToken(domain, account.hubId);
     } catch (err) {
@@ -617,7 +620,7 @@ const pullDataFromHubspot = async () => {
 
     const actions = [];
     const q = createQueue(domain, actions);
-    // console.info("Q: ", q)
+    console.info("Q: ", q)
     try {
       await processContacts(domain, account.hubId, q);
       console.log('process contacts');

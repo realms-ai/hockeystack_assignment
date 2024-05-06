@@ -5,12 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node inspect app.js"
+    "dev": "NODE_DEBUG=curl* node inspect app.js"
   },
   "author": "HockeyStack",
   "license": "UNLICENSED",
   "dependencies": {
-    "@hubspot/api-client": "^8.5.0",
     "async": "^3.2.4",
     "axios": "^1.6.8",
     "body-parser": "^1.20.1",
@@ -24,6 +23,9 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "eslint": "^8.34.0"
+    "@hubspot/api-client": "github:realms-ai/hubspot-api-nodejs#curlLog",
+    "convert-fetch-to-curl": "^0.0.4",
+    "eslint": "^8.34.0",
+    "nodemon": "^3.1.0"
   }
 }

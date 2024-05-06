@@ -26,6 +26,7 @@ Every data source in this project was created for test purposes. If any request 
 
 1. All the **meetings** at the moment have updated date before the lastPulledDate, so create a new meeting or update any of the meetings with marked as **completed** to see the result
 2. If you want to see more logs, un-comment the lines with **console.info** in the code
+3. This branch is using the hub client from developer's repo and show a curl command of every request done by the code. 
 
 ## Brief by Navpreet Singh (Developer)
 
